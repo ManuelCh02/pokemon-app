@@ -14,36 +14,37 @@ async function showPokemonData(urlAPI) {
     }
 }
 
-function putNames(name, type, listOfMoves) {
-    console.log(listOfMoves)
+function putNames(name, type, listOfMoves, img) {
+    const firstToUpperCase = () => name.charAt(0).toUpperCase() + name.slice(1)
 
-    maninContainer.innerHTML = `
-    <article class="pokemon-card">
-            <div>
-                <h3>${name}</h3>
-                <div class="pokemon-card__pokemon-img-container">
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png" alt="Charmander">
-                </div>
-                <div>
-                    <h4>Type</h4>
-                    <span>${type}</span>
-                </div>
-                <div>
-                    <h4 class="pokemon-card__movementes-title">Movements</h4>
-                    <ul class="pokemon-card__movements-list-container">
-
-                    </ul>
-                </div>
+    const article = document.createElement('article')
+    article.classList.add('pokemon-card')
+    article.innerHTML = `
+        <div>
+            <h3>${firstToUpperCase()}</h3>
+            <div class="pokemon-card__pokemon-img-container">
+                <img src=${img} alt=${firstToUpperCase()}>
             </div>
-        </article>   
-    `
+            <div class="pokemon-card__type-container">
+                <h4>Type</h4>
+                ${type.map(e => `<span class="pokemon-card__type-element">${e} </span>`).join('')}
+            </div>
+             <div>
+                <h4 class="pokemon-card__movementes-title">Movements</h4>
+                <ul class="pokemon-card__movements-list-container">
+                    ${listOfMoves.map(move => `<li>${move}</li>`).join('')}
+                </ul>
+            </div>
+        </div>`
+    maninContainer.append(article)
 }
 
+const askForListOfMoves = response => response.moves.map(element => element.move.name).slice(0, 5)
 
 showPokemonData(`${API}`)
     .then(() => {
         for(let i = 1; i <= GLOBAL_RESEARCH; i++) {
             showPokemonData(`${API}/${i}`)
-                .then((response) => putNames(response.name, response.types.map(e => e.type.name), response.moves.map(m => m.name)))
+                .then((response) => putNames(response.name, response.types.map(e => e.type.name), askForListOfMoves(response), response.sprites.front_default))
         }
     })

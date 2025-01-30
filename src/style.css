@@ -131,10 +131,21 @@ main {
 .pokemon-card__movementes-title {
     margin-top: 0;
     padding: var(--padding);
-    background-color: #fd8c8c;
+    background-color: var(--border-boxes);
     border-radius: var(--main-border-radius);
 }
 
 .pokemon-card__movements-list-container {
     padding-left: 0;
+}
+
+/** Styles for types (background colors) **/
+.green {
+  background-color: #95f89a;
+  padding: 10px;
+}
+
+.red {
+  background-color: #f89595;
+  padding: 10px;
 }
