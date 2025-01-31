@@ -142,10 +142,12 @@ main {
 /** Styles for types (background colors) **/
 .green {
   background-color: #95f89a;
-  padding: 10px;
+  padding: 5px;
+  border-radius: var(--main-border-radius);
 }
 
 .red {
   background-color: #f89595;
-  padding: 10px;
+  padding: 5px;
+  border-radius: var(--main-border-radius);
 }

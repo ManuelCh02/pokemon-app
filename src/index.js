@@ -3,7 +3,6 @@ import { API } from './api-call.mjs'
 
 const GLOBAL_RESEARCH = 10
 const maninContainer = document.querySelector('.main-container')
-const pokemonMovementContainer = document.querySelector('.pokemon-card__movements-list-container')
 
 async function showPokemonData(urlAPI) {
     try {
